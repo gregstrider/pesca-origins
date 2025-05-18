@@ -136,7 +136,7 @@ export default function Home() {
       }}
     >
       <h1 style={{ fontSize: "2rem", marginBottom: "1rem" }}>
-        Pesca  Habbo Origins BR
+        Pesca - Habbo Origins BR
       </h1>
 
       <div style={{ display: "flex", gap: "0.5rem", marginBottom: "2rem" }}>

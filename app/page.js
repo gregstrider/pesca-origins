@@ -224,7 +224,7 @@ export default function Home() {
       )}
 
       {searchHistory.length > 0 && (
-        <section
+        <><section
           style={{
             marginTop: "2rem",
             maxWidth: "600px",
@@ -344,7 +344,7 @@ export default function Home() {
                   onClick={() => {
                     setUsername(entry.name);
                     handleSearch();
-                  }}
+                  } }
                   title={`Clique para consultar ${entry.name}`}
                 >
                   <td
@@ -381,9 +381,16 @@ export default function Home() {
               ))}
             </tbody>
           </table>
-        </section>
-
-        Criado por Greg.
+        </section><footer
+          style={{
+            marginTop: "2rem",
+            textAlign: "center",
+            color: "#888",
+            fontSize: "1rem",
+          }}
+        >
+            Criado por Greg
+          </footer></>
       )}
     </main>
   );

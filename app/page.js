@@ -287,6 +287,10 @@ export default function Home() {
             </div>
           </div>
 
+                          <p style={{ fontSize: "1rem", color: "#ccc", marginTop: "-0.4rem", marginBottom: "1.5rem" }}>
+  <i>A tabela é atualizada manualmente com base nos usuários que você pesquisa. Clique duas vezes no usuário para atualizar a pontuação.</i>
+</p>
+
           <table
             style={{
               width: "100%",

@@ -397,6 +397,27 @@ export default function Home() {
           </table>
         </section></>
       )}
+      <button
+  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+  style={{
+    position: "fixed",
+    bottom: "20px",
+    right: "20px",
+    padding: "0.6rem 0.9rem",
+    fontSize: "1.5rem",
+    backgroundColor: "#007bff",
+    color: "#fff",
+    border: "none",
+    borderRadius: "50%",
+    cursor: "pointer",
+    boxShadow: "0 0 10px rgba(0,0,0,0.5)",
+    zIndex: 9999,
+  }}
+  title="Voltar ao topo"
+>
+  ↑
+</button>
+
     </main>
   );
 }

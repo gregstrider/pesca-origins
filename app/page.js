@@ -14,6 +14,25 @@ export default function Home() {
   const [searchHistory, setSearchHistory] = useState([]);
   const [sortKey, setSortKey] = useState("level");
   const [sortAsc, setSortAsc] = useState(false); // false = descendente
+  const [onlineUsers, setOnlineUsers] = useState(null);
+
+  useEffect(() => {
+  const fetchOnlineUsers = async () => {
+    try {
+      const res = await fetch("https://origins.habbo.com.br/api/public/origins/users");
+      const json = await res.json();
+      setOnlineUsers(json.onlineUsers);
+    } catch (err) {
+      console.error("Erro ao buscar usuários online:", err);
+    }
+  };
+
+  fetchOnlineUsers();
+
+  const interval = setInterval(fetchOnlineUsers, 30000); // atualiza a cada 30 segundos
+  return () => clearInterval(interval);
+}, []);
+
 
   useEffect(() => {
     const savedHistory = localStorage.getItem("ranking");
@@ -129,6 +148,7 @@ export default function Home() {
   };
 
   return (
+    
     <main
       style={{
         minHeight: "100vh",
@@ -148,7 +168,24 @@ export default function Home() {
   Criado por Greg
 </p>
 
-      
+{onlineUsers !== null && (
+  <div
+    style={{
+      position: "fixed",
+      bottom: "1rem",
+      left: "1rem",
+      backgroundColor: "#2a2a2a",
+      padding: "0.5rem 1rem",
+      borderRadius: "8px",
+      color: "#fff",
+      fontSize: "0.9rem",
+      boxShadow: "0 0 10px rgba(0,0,0,0.5)",
+      zIndex: 1000,
+    }}
+  >
+    <strong>Usuários online:</strong> {onlineUsers}
+  </div>
+)}
 
       <div style={{ display: "flex", gap: "0.5rem", marginBottom: "2rem" }}>
         <input

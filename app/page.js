@@ -52,6 +52,7 @@ export default function Home() {
         lastAccessTime: userJson.lastAccessTime,
         level: skillJson.level,
         experience: skillJson.experience,
+        queriedAt: new Date().toISOString(), // <-- adiciona a data da consulta
       };
 
       setSearchHistory((prev) => {
@@ -292,109 +293,131 @@ export default function Home() {
 </p>
 
           <table
-            style={{
-              width: "100%",
-              borderCollapse: "collapse",
-              backgroundColor: "#222",
-              borderRadius: "8px",
-              overflow: "hidden",
-            }}
-          >
-            <thead>
-              <tr>
-                <th
-                  style={{ cursor: "default", padding: "0.5rem 0.75rem" }}
-                >
-                  Posição
-                </th>
-                <th
-                  onClick={() => toggleSort("name")}
-                  style={{
-                    cursor: "pointer",
-                    padding: "0.5rem 0.75rem",
-                    userSelect: "none",
-                  }}
-                  title="Ordenar por Nome"
-                >
-                  Nome{" "}
-                  {sortKey === "name" && (sortAsc ? "▲" : "▼")}
-                </th>
-                <th
-                  onClick={() => toggleSort("level")}
-                  style={{
-                    cursor: "pointer",
-                    padding: "0.5rem 0.75rem",
-                    userSelect: "none",
-                    color: "green",
-                  }}
-                  title="Ordenar por Nível"
-                >
-                  Nível{" "}
-                  {sortKey === "level" && (sortAsc ? "▲" : "▼")}
-                </th>
-                <th
-                  onClick={() => toggleSort("experience")}
-                  style={{
-                    cursor: "pointer",
-                    padding: "0.5rem 0.75rem",
-                    userSelect: "none",
-                    color: "goldenrod",
-                  }}
-                  title="Ordenar por Experiência"
-                >
-                  EXP{" "}
-                  {sortKey === "experience" && (sortAsc ? "▲" : "▼")}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {sortedHistory.map((entry, idx) => (
-                <tr
-                  key={entry.name}
-                  style={{
-                    borderBottom: "1px solid #444",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => {
-                    setUsername(entry.name);
-                    handleSearch();
-                  } }
-                  title={`Clique para consultar ${entry.name}`}
-                >
-                  <td
-                    style={{
-                      textAlign: "center",
-                      padding: "0.5rem 0.75rem",
-                      width: "60px",
-                    }}
-                  >
-                    {idx + 1}
-                  </td>
-                  <td style={{ padding: "0.5rem 0.75rem" }}>{entry.name}</td>
-                  <td
-                    style={{
-                      padding: "0.5rem 0.75rem",
-                      color: "green",
-                      textAlign: "center",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    {entry.level}
-                  </td>
-                  <td
-                    style={{
-                      padding: "0.5rem 0.75rem",
-                      color: "goldenrod",
-                      textAlign: "center",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    {entry.experience}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+  style={{
+    width: "100%",
+    borderCollapse: "collapse",
+    backgroundColor: "#222",
+    borderRadius: "8px",
+    overflow: "hidden",
+  }}
+>
+  <thead>
+    <tr>
+      <th style={{ cursor: "default", padding: "0.5rem 0.75rem" }}>
+        Posição
+      </th>
+      <th
+        onClick={() => toggleSort("name")}
+        style={{
+          cursor: "pointer",
+          padding: "0.5rem 0.75rem",
+          userSelect: "none",
+        }}
+        title="Ordenar por Nome"
+      >
+        Nome {sortKey === "name" && (sortAsc ? "▲" : "▼")}
+      </th>
+      <th
+        onClick={() => toggleSort("level")}
+        style={{
+          cursor: "pointer",
+          padding: "0.5rem 0.75rem",
+          userSelect: "none",
+          color: "green",
+        }}
+        title="Ordenar por Nível"
+      >
+        Nível {sortKey === "level" && (sortAsc ? "▲" : "▼")}
+      </th>
+      <th
+        onClick={() => toggleSort("experience")}
+        style={{
+          cursor: "pointer",
+          padding: "0.5rem 0.75rem",
+          userSelect: "none",
+          color: "goldenrod",
+        }}
+        title="Ordenar por Experiência"
+      >
+        EXP {sortKey === "experience" && (sortAsc ? "▲" : "▼")}
+      </th>
+      {/* Nova coluna */}
+      <th
+        style={{
+          cursor: "default",
+          padding: "0.5rem 0.75rem",
+          userSelect: "none",
+          color: "#aaa",
+        }}
+        title="Data da última consulta"
+      >
+        Atualizado em
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {sortedHistory.map((entry, idx) => (
+      <tr
+        key={entry.name}
+        style={{
+          borderBottom: "1px solid #444",
+          cursor: "pointer",
+        }}
+        onClick={() => {
+          setUsername(entry.name);
+          handleSearch();
+        }}
+        title={`Clique duas vezes para atualizar ${entry.name}`}
+      >
+        <td
+          style={{
+            textAlign: "center",
+            padding: "0.5rem 0.75rem",
+            width: "60px",
+          }}
+        >
+          {idx + 1}
+        </td>
+        <td style={{ padding: "0.5rem 0.75rem" }}>{entry.name}</td>
+        <td
+          style={{
+            padding: "0.5rem 0.75rem",
+            color: "green",
+            textAlign: "center",
+            fontWeight: "bold",
+          }}
+        >
+          {entry.level}
+        </td>
+        <td
+          style={{
+            padding: "0.5rem 0.75rem",
+            color: "goldenrod",
+            textAlign: "center",
+            fontWeight: "bold",
+          }}
+        >
+          {entry.experience}
+        </td>
+        {/* Coluna nova com data formatada */}
+        <td
+          style={{
+            padding: "0.5rem 0.75rem",
+            color: "#ccc",
+            textAlign: "center",
+            fontWeight: "normal",
+            fontSize: "0.85rem",
+            whiteSpace: "nowrap",
+          }}
+        >
+          {entry.queriedAt
+            ? new Date(entry.queriedAt).toLocaleString()
+            : "-"}
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
         </section></>
       )}
       <button

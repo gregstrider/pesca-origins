@@ -382,6 +382,8 @@ export default function Home() {
             </tbody>
           </table>
         </section>
+
+        Criado por Greg.
       )}
     </main>
   );

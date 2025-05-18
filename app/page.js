@@ -1,4 +1,9 @@
 "use client";
+import Head from "next/head";
+<Head>
+  <title>Ranking de Pesca - Habbo Origins BR</title>
+  <meta name="description" content="Veja o ranking de habilidade de pesca dos jogadores do Habbo Origins BR" />
+</Head>
 
 import { useState, useEffect } from "react";
 
@@ -136,8 +141,13 @@ export default function Home() {
       }}
     >
       <h1 style={{ fontSize: "2rem", marginBottom: "1rem" }}>
-        Pesca - Habbo Origins BR
+        Pesca  Habbo Origins BR
       </h1>
+      <p style={{ fontSize: "1rem", color: "#ccc", marginTop: "-1rem", marginBottom: "1.5rem" }}>
+  Criado por Greg
+</p>
+
+      
 
       <div style={{ display: "flex", gap: "0.5rem", marginBottom: "2rem" }}>
         <input
@@ -381,16 +391,7 @@ export default function Home() {
               ))}
             </tbody>
           </table>
-        </section><footer
-          style={{
-            marginTop: "2rem",
-            textAlign: "center",
-            color: "#888",
-            fontSize: "1rem",
-          }}
-        >
-            Criado por Greg
-          </footer></>
+        </section></>
       )}
     </main>
   );
